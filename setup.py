@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ecs_task_run",
-    version="0.0.1",
+    version="0.0.2",
     author="Aurelio Saraiva",
     author_email="aurelio.saraiva@creditas.com.br",
     description="ECS Task Definition run",
@@ -13,6 +13,7 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/creditas/ecs-task-run",
     packages=setuptools.find_packages(),
+    entry_points={"console_scripts": ["ecs-task-run=ecs_task_run:main"]},
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",
