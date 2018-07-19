@@ -5,7 +5,7 @@ with open("README.md", "r") as fh:
 
 setuptools.setup(
     name="ecs_task_run",
-    version="0.0.2",
+    version="0.0.3",
     author="Aurelio Saraiva",
     author_email="aurelio.saraiva@creditas.com.br",
     description="ECS Task Definition run",
@@ -20,6 +20,6 @@ setuptools.setup(
         "Operating System :: OS Independent",
     ),
     install_requires=[
-
+        "boto3"
     ]
 )
