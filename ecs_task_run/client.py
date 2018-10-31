@@ -51,6 +51,14 @@ class Client(object):
             tasks=[task_id]
         )
 
+    def get_exit_status_for_task(self, container_definition, task_id):
+        task_info = self.ecs_client.describe_tasks(
+            cluster=self.cluster_name,
+            tasks=[task_id]
+        )['tasks'][0]
+
+        return task_info['containers'][0]['exitCode']
+
     def get_logs_for_task(self, container_definition, task_id):
         container_name = container_definition['name']
         log_options = container_definition['logConfiguration']['options']

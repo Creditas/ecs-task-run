@@ -1,3 +1,4 @@
+import sys
 import argparse
 from .client import Client
 
@@ -23,3 +24,6 @@ def main():
 
     for log_message in client.get_logs_for_task(updated_container, task_id):
         print('  > {0}'.format(log_message))
+
+    exit_status = client.get_exit_status_for_task(updated_container, task_id)
+    sys.exit(exit_status)
