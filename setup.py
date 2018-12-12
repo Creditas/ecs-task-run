@@ -13,7 +13,8 @@ setuptools.setup(
     long_description_content_type="text/markdown",
     url="https://github.com/creditas/ecs-task-run",
     packages=setuptools.find_packages(),
-    entry_points={"console_scripts": ["ecs-task-run=ecs_task_run:main"]},
+    entry_points={"console_scripts": ["ecs-task-run=ecs_task_run:main",
+                                      "ecs-run=ecs_task_run:ecs_run"]},
     classifiers=(
         "Programming Language :: Python :: 3",
         "License :: OSI Approved :: MIT License",

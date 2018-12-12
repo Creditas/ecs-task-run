@@ -10,30 +10,34 @@ $ pip install ecs-task-run
 
 ### Running tasks:
 ```bash
-$ ecs-task-run task --cluster YOUR_CLUSTER_NAME --task YOUR_TASK_DEFINITION --image YOUR_IMAGE
+$ ecs-task-run --cluster YOUR_CLUSTER_NAME --task YOUR_TASK_DEFINITION --image YOUR_IMAGE
 ```
 or:
 ```bash
-$ ecs-task-run task -c YOUR_CLUSTER_NAME -t YOUR_TASK_DEFINITION -i YOUR_IMAGE
+$ ecs-run task --cluster YOUR_CLUSTER_NAME --task YOUR_TASK_DEFINITION --image YOUR_IMAGE
+```
+or:
+```bash
+$ ecs-run task -c YOUR_CLUSTER_NAME -t YOUR_TASK_DEFINITION -i YOUR_IMAGE
 ```
 
 ### Updating Services:
 ```bash
-$ ecs-task-run update-service --cluster YOUR_CLUSTER_NAME --task YOUR_TASK_DEFINITION --image YOUR_IMAGE --service YOUR_SERVICE_NAME
+$ ecs-run update-service --cluster YOUR_CLUSTER_NAME --task YOUR_TASK_DEFINITION --image YOUR_IMAGE --service YOUR_SERVICE_NAME
 ```
 or:
 ```bash
-$ ecs-task-run update-service -c YOUR_CLUSTER_NAME -t YOUR_TASK_DEFINITION -i YOUR_IMAGE -s YOUR_SERVICE_NAME
+$ ecs-run update-service -c YOUR_CLUSTER_NAME -t YOUR_TASK_DEFINITION -i YOUR_IMAGE -s YOUR_SERVICE_NAME
 ```
 
 ### Running a deploy config
 To run a list of jobs from a file.
 ```bash
-ecs-task-run run-config --path LOCAL_PATH_TO_CONFIG
+ecs-run run-config --path LOCAL_PATH_TO_CONFIG
 ```
 or
 ```bash
-ecs-task-run run-config -p LOCAL_PATH_TO_CONFIG
+ecs-run run-config -p LOCAL_PATH_TO_CONFIG
 ```
 
 Example config:

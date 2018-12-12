@@ -53,6 +53,18 @@ def run_update_service(cluster_name, image_name, service_name, task_family):
         sys.exit(1)
 
 def main():
+    parser = argparse.ArgumentParser(description='ECS Task Run')
+    parser.add_argument('--cluster')
+    parser.add_argument('--task')
+    parser.add_argument('--image')
+    args = parser.parse_args()
+
+    run_task(cluster_name=args.cluster,
+             image_name=args.image,
+             task_family=args.task)
+    sys.exit(0)
+
+def ecs_run():
     parser = argparse.ArgumentParser(description='ECS Run')
     parser.add_argument('task_option', help='options:update-service, task, run-config')
     parser.add_argument('--cluster', '-c')
