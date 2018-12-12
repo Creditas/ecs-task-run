@@ -33,23 +33,23 @@ $ ecs-run update-service -c YOUR_CLUSTER_NAME -t YOUR_TASK_DEFINITION -i YOUR_IM
 ### Running a deploy config
 To run a list of jobs from a file.
 ```bash
-ecs-run run-config --path LOCAL_PATH_TO_CONFIG
+ecs-run run-jobs --path LOCAL_PATH_TO_CONFIG
 ```
 or
 ```bash
-ecs-run run-config -p LOCAL_PATH_TO_CONFIG
+ecs-run run-jobs -p LOCAL_PATH_TO_CONFIG
 ```
 
 Example config:
 ```json
 [{
-"task_option":"task",
+"job_option":"task",
 "task":"YOUR_TASK_DEFINITION",
 "image":"YOUR_IMAGE",
 "cluster":"YOUR_CLUSTER_NAME"
 },
 {
-"task_option":"update-service",
+"job_option":"update-service",
 "task":"YOUR_TASK_DEFINITION",
 "service":"YOUR_SERVICE_NAME",
 "image":"YOUR_IMAGE",
