@@ -72,3 +72,10 @@ class Client(object):
         )
 
         return registered['taskDefinition']['taskDefinitionArn']
+
+    def get_exit_status_for_task(self, task_id):
+        task_info = self.ecs_client.describe_tasks(
+            cluster=self.cluster_name,
+            tasks=[task_id]
+        )['tasks'][0]
+        return task_info['containers'][0]['exitCode']
