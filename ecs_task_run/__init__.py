@@ -23,7 +23,7 @@ def run_task(cluster_name, image_name, task_family):
     for log_message in client_instance.get_logs_for_task(updated_container, task_id):
         print('  > {0}'.format(log_message))
 
-    exit_status = client_instance.get_exit_status_for_task(updated_container, task_id)
+    exit_status = client_instance.get_exit_status_for_task(task_id)
     print('Task {0} finished with status code:{1}'.format(task_id, exit_status))
     if exit_status != 0:
         sys.exit(exit_status)
