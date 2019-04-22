@@ -13,20 +13,26 @@ def run_task(cluster_name, image_name, task_family):
         raise Exception('argument --task should not be none')
     if image_name is None:
         raise Exception('argument --image should not be none')
-    client_instance = Client(cluster_name, image_name)
-    updated_container = client_instance.update_container(task_family)
-    task_id = client_instance.run_task(updated_container, task_family=task_family)
-    print('Started task {0}'.format(task_id))
-    client_instance.wait_for_task(task_id)
-    print('Task output:')
 
-    for log_message in client_instance.get_logs_for_task(updated_container, task_id):
-        print('  > {0}'.format(log_message))
+    try:
+        client_instance = Client(cluster_name, image_name)
+        updated_container = client_instance.update_container(task_family)
+        task_id = client_instance.run_task(updated_container, task_family=task_family)
+        print('Started task {0}'.format(task_id))
+        client_instance.wait_for_task(task_id)
+        print('Task output:')
 
-    exit_status = client_instance.get_exit_status_for_task(task_id)
-    print('Task {0} finished with status code:{1}'.format(task_id, exit_status))
-    if exit_status != 0:
-        sys.exit(exit_status)
+        for log_message in client_instance.get_logs_for_task(updated_container, task_id):
+            print('  > {0}'.format(log_message))
+
+        exit_status = client_instance.get_exit_status_for_task(task_id)
+        print('Task {0} finished with status code:{1}'.format(task_id, exit_status))
+        if exit_status != 0:
+            sys.exit(exit_status)
+    except Exception as error:
+        print('Run Task Failed:{}'.format(image_name))
+        print(error)
+        sys.exit(1)
 
 def run_update_service(cluster_name, image_name, service_name, task_family):
     if cluster_name is None:
