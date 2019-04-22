@@ -44,7 +44,7 @@ class Client(object):
             taskDefinition=new_definition_arn
         )
 
-        if len(task['failures']) > 0:
+        if len(task.get('failures')) > 0:
             raise Exception('Run Task Failed - {}'.format(task['failures']))
 
         return task['tasks'][0]['taskArn'].split('/')[1]
