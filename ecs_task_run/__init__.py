@@ -89,6 +89,7 @@ def main():
              task_family=args.task)
     sys.exit(0)
 
+
 def ecs_run():
     parser = argparse.ArgumentParser(description='ECS Run')
     parser.add_argument('job_option', help='options:update-service, task, run-jobs')
@@ -97,6 +98,7 @@ def ecs_run():
     parser.add_argument('--image', '-i')
     parser.add_argument('--service', '-s')
     parser.add_argument('--path', '-p')
+    parser.add_argument('--executionrole', '-ex')
     args = parser.parse_args()
 
     if args.job_option == 'run-jobs':
@@ -117,7 +119,8 @@ def ecs_run():
         run_update_service(cluster_name=args.cluster,
                            image_name=args.image,
                            task_family=args.task,
-                           service_name=args.service)
+                           service_name=args.service,
+                           execution_role_arn=args.executionrolearn)
         sys.exit(0)
     else:
         raise Exception('Invalid job_option, should be: task, update-service, run-jobs')

@@ -69,10 +69,12 @@ class Client(object):
 
         return [e['message'] for e in events['events']]
 
-    def _update_task_definition(self, container_definition, task_family):
+    def _update_task_definition(self, container_definition, task_family,
+                                execution_role_arn=None):
         registered = self.ecs_client.register_task_definition(
             family=task_family,
-            containerDefinitions=[container_definition]
+            containerDefinitions=[container_definition],
+            executionRoleArn=execution_role_arn
         )
 
         return registered['taskDefinition']['taskDefinitionArn']
