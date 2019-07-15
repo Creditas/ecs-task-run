@@ -34,6 +34,7 @@ def run_task(cluster_name, image_name, task_family):
         print(error)
         sys.exit(1)
 
+
 def run_update_service(cluster_name, image_name, service_name, task_family):
     if cluster_name is None:
         raise Exception('argument --cluster should not be none')
@@ -58,6 +59,7 @@ def run_update_service(cluster_name, image_name, service_name, task_family):
         print(error)
         sys.exit(1)
 
+
 def process_job_item(job_item):
     job_option = job_item.get('job_option', None)
     cluster = job_item.get('cluster', None)
@@ -76,6 +78,7 @@ def process_job_item(job_item):
                            service_name=service)
     else:
         raise Exception("Invalid job_option")
+
 
 def main():
     parser = argparse.ArgumentParser(description='ECS Task Run')
