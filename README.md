@@ -6,6 +6,13 @@
 $ pip install ecs-task-run
 ```
 
+## Create new revision
+
+To create a new release, you need to edit the (setup.py)[https://github.com/Creditas/ecs-task-run/blob/master/setup.py#L8] file, stating the number of the new version.
+
+After you merge, the travis-ci pipeline will automatically publish the new version at https://pypi.org/project/ecs-task-run/
+
+
 ## Using
 
 ### Running tasks:
