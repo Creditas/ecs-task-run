@@ -35,7 +35,7 @@ def run_task(cluster_name, image_name, task_family):
         sys.exit(1)
 
 
-def run_update_service(cluster_name, image_name, service_name, task_family):
+def run_update_service(cluster_name, image_name, service_name, task_family, execution_role_arn):
     if cluster_name is None:
         raise Exception('argument --cluster should not be none')
     if task_family is None:
@@ -52,6 +52,7 @@ def run_update_service(cluster_name, image_name, service_name, task_family):
                 container_definition=updated_container,
                 service=service_name,
                 task_family=task_family,
+                execution_role_arn=execution_role_arn
                 )
         print('Updated Service:{}'.format(service_name))
     except Exception as error:
@@ -66,6 +67,7 @@ def process_job_item(job_item):
     task = job_item.get('task', None)
     image = job_item.get('image', None)
     service = job_item.get('service', None)
+    execution_role_arn = job_item.get('executionrolearn', None)
     print('Stating to run:{} updated'.format(job_option))
     if job_option == 'task':
         run_task(cluster_name=cluster,
@@ -75,7 +77,8 @@ def process_job_item(job_item):
         run_update_service(cluster_name=cluster,
                            task_family=task,
                            image_name=image,
-                           service_name=service)
+                           service_name=service,
+                           execution_role_arn=execution_role_arn)
     else:
         raise Exception("Invalid job_option")
 

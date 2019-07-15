@@ -21,7 +21,7 @@ class Client(object):
 
         return new_container
 
-    def update_service(self, container_definition, task_family, service):
+    def update_service(self, container_definition, task_family, service, execution_role_arn):
         new_definition_arn = self._update_task_definition(
             container_definition,
             task_family
@@ -30,7 +30,8 @@ class Client(object):
         self.ecs_client.update_service(
             cluster=self.cluster_name,
             service=service,
-            taskDefinition=new_definition_arn
+            taskDefinition=new_definition_arn,
+            execution_role_arn=execution_role_arn
         )
 
     def run_task(self, container_definition, task_family):
