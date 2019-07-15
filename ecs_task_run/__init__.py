@@ -101,7 +101,7 @@ def ecs_run():
     parser.add_argument('--image', '-i')
     parser.add_argument('--service', '-s')
     parser.add_argument('--path', '-p')
-    parser.add_argument('--executionrole', '-ex')
+    parser.add_argument('--executionrolearn', '-ex')
     args = parser.parse_args()
 
     if args.job_option == 'run-jobs':
