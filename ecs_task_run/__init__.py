@@ -2,6 +2,7 @@ import argparse
 import json
 import os
 import sys
+import logging
 
 from .client import Client
 
@@ -44,16 +45,26 @@ def run_update_service(cluster_name, image_name, service_name, task_family, exec
         raise Exception('argument --image should not be none')
     if service_name is None:
         raise Exception('argument --service should not be none')
+
     try:
         print('Updating Service: {}'.format(service_name))
         client_instance = Client(cluster_name, image_name)
         updated_container = client_instance.update_container(task_family)
-        client_instance.update_service(
-                container_definition=updated_container,
-                service=service_name,
-                task_family=task_family,
-                execution_role_arn=execution_role_arn
-                )
+        if execution_role_arn:
+            print('Running with execution_role_arn: {}'.format(execution_role_arn))
+            client_instance.update_service(
+                    container_definition=updated_container,
+                    service=service_name,
+                    task_family=task_family,
+                    execution_role_arn=execution_role_arn
+                    )
+        else:
+            print('No Execution_Role_Arn defined')
+            client_instance.update_service(
+                    container_definition=updated_container,
+                    service=service_name,
+                    task_family=task_family
+                    )
         print('Updated Service:{}'.format(service_name))
     except Exception as error:
         print('Updated Service Failed:{}'.format(service_name))
