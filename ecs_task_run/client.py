@@ -24,14 +24,14 @@ class Client(object):
     def update_service(self, container_definition, task_family, service, execution_role_arn):
         new_definition_arn = self._update_task_definition(
             container_definition,
-            task_family
+            task_family,
+            execution_role_arn
         )
 
         self.ecs_client.update_service(
             cluster=self.cluster_name,
             service=service,
-            taskDefinition=new_definition_arn,
-            execution_role_arn=execution_role_arn
+            taskDefinition=new_definition_arn
         )
 
     def run_task(self, container_definition, task_family):
@@ -70,8 +70,7 @@ class Client(object):
 
         return [e['message'] for e in events['events']]
 
-    def _update_task_definition(self, container_definition, task_family,
-                                execution_role_arn=None):
+    def _update_task_definition(self, container_definition, task_family, execution_role_arn):
         registered = self.ecs_client.register_task_definition(
             family=task_family,
             containerDefinitions=[container_definition],

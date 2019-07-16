@@ -2,7 +2,6 @@ import argparse
 import json
 import os
 import sys
-import logging
 
 from .client import Client
 
@@ -52,11 +51,12 @@ def run_update_service(cluster_name, image_name, service_name, task_family, exec
         updated_container = client_instance.update_container(task_family)
         if execution_role_arn:
             print('Running with execution_role_arn: {}'.format(execution_role_arn))
+            print('Execution_role_arn actual type: {}'.format(str(type(unicode(execution_role_arn)))))
             client_instance.update_service(
                     container_definition=updated_container,
                     service=service_name,
                     task_family=task_family,
-                    execution_role_arn=execution_role_arn
+                    execution_role_arn=unicode(execution_role_arn)
                     )
         else:
             print('No Execution_Role_Arn defined')
