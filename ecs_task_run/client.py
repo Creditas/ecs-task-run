@@ -34,10 +34,11 @@ class Client(object):
             taskDefinition=new_definition_arn
         )
 
-    def run_task(self, container_definition, task_family):
+    def run_task(self, container_definition, task_family, execution_role_arn):
         new_definition_arn = self._update_task_definition(
             container_definition,
-            task_family
+            task_family,
+            execution_role_arn
         )
 
         task = self.ecs_client.run_task(

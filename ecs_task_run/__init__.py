@@ -6,7 +6,7 @@ import sys
 from .client import Client
 
 
-def run_task(cluster_name, image_name, task_family):
+def run_task(cluster_name, image_name, task_family, execution_role_arn):
     if cluster_name is None:
         raise Exception('argument --cluster should not be none')
     if task_family is None:
@@ -17,7 +17,7 @@ def run_task(cluster_name, image_name, task_family):
     try:
         client_instance = Client(cluster_name, image_name)
         updated_container = client_instance.update_container(task_family)
-        task_id = client_instance.run_task(updated_container, task_family=task_family)
+        task_id = client_instance.run_task(updated_container, task_family=task_family, execution_role_arn=execution_role_arn)
         print('Started task {0}'.format(task_id))
         client_instance.wait_for_task(task_id)
         print('Task output:')
@@ -129,7 +129,8 @@ def ecs_run():
     elif args.job_option == 'task':
         run_task(cluster_name=args.cluster,
                  image_name=args.image,
-                 task_family=args.task)
+                 task_family=args.task,
+                 execution_role_arn=args.executionrolearn)
         sys.exit(0)
 
     elif args.job_option == 'update-service':
