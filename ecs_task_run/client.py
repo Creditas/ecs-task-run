@@ -80,14 +80,16 @@ class Client(object):
         return task_definition['taskDefinition']['executionRoleArn']
 
     def _update_task_definition(self, container_definition, task_family):
+        print('_update_task_definition {0}'.format(task_family))
         execution_role_arn = self._get_execution_role_arn(task_family)
+        print('execution_role_arn {0}'.format(execution_role_arn))
 
         registered = self.ecs_client.register_task_definition(
             family=task_family,
             containerDefinitions=[container_definition],
             executionRoleArn=execution_role_arn
         )
-
+        print('registered {0}'.format(registered)
         return registered['taskDefinition']['taskDefinitionArn']
 
     def get_exit_status_for_task(self, task_id):
