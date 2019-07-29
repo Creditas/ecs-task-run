@@ -89,7 +89,7 @@ class Client(object):
             containerDefinitions=[container_definition],
             executionRoleArn=execution_role_arn
         )
-        print('registered {0}'.format(registered)
+        print('registered {0}'.format(registered))
         return registered['taskDefinition']['taskDefinitionArn']
 
     def get_exit_status_for_task(self, task_id):
