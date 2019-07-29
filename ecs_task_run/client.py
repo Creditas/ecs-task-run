@@ -73,10 +73,11 @@ class Client(object):
         return [e['message'] for e in events['events']]
 
     def _get_execution_role_arn(self, task_family):
+        print('_get_execution_role_arn {0}'.format(task_family))
         task_definition = self.ecs_client.describe_task_definition(
             taskDefinition=task_family
         )
-
+        print('task_definition {0}'.format(task_definition))
         return task_definition['taskDefinition']['executionRoleArn']
 
     def _update_task_definition(self, container_definition, task_family):
