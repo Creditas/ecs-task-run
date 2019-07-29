@@ -34,17 +34,19 @@ class Client(object):
         )
 
     def run_task(self, container_definition, task_family):
+        print('Started run task {0}'.format(container_definition))
         new_definition_arn = self._update_task_definition(
             container_definition,
             task_family
         )
 
+        print('new_definition_arn {0}'.format(new_definition_arn))
         task = self.ecs_client.run_task(
             cluster=self.cluster_name,
             taskDefinition=new_definition_arn
         )
 
-        print('Task Detailed - {}'.format(task))
+        print('task {0}'.format(task))
         if len(task.get('failures', [])) > 0:
             raise Exception('Run Task Failed - {}'.format(task['failures']))
 
