@@ -73,8 +73,9 @@ class Client(object):
         task_definition = self.ecs_client.describe_task_definition(
             taskDefinition=task_family
         )
-
-        return task_definition['taskDefinition']['executionRoleArn']
+        if 'executionRoleArn' in task_definition['taskDefinition']:
+            return task_definition['taskDefinition']['executionRoleArn']
+        return
 
     def _update_task_definition(self, container_definition, task_family):
         execution_role_arn = self._get_execution_role_arn(task_family)
