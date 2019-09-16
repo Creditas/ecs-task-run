@@ -75,7 +75,7 @@ class Client(object):
         )
         if 'executionRoleArn' in task_definition['taskDefinition']:
             return task_definition['taskDefinition']['executionRoleArn']
-        return
+        return ''
 
     def _update_task_definition(self, container_definition, task_family):
         execution_role_arn = self._get_execution_role_arn(task_family)
