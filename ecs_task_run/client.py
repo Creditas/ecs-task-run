@@ -47,7 +47,7 @@ class Client(object):
         if len(task.get('failures', [])) > 0:
             raise Exception('Run Task Failed - {}'.format(task['failures']))
 
-        return task['tasks'][0]['taskArn'].split('/')[1]
+        return task['tasks'][0]['taskArn'].split('/')[-1]
 
     def wait_for_task(self, task_id):
         self.ecs_client.get_waiter('tasks_stopped').wait(
